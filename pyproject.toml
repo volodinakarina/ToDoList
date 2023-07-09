@@ -5,7 +5,7 @@ description = ""
 authors = ["karinavolodina <volodinakarina27@yandex.ru>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.9.6"
 django = "^4.2.2"
 envparse = "^0.2.0"
 psycopg2-binary = "^2.9.6"
@@ -17,3 +17,43 @@ pre-commit = "^3.3.3"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[toll.black]
+line-lenght = 120
+skip-string-normalization = true
+skip-magic-trailing-coma = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+    | \.venv
+    | migrations
+)/
+'''
+
+#[tool.isort]
+#multi_line_output = 3
+#include_trailing_comma = true
+#line_lenght = 120
+#combine_as_imports = true
+#combine_star = true
+#skip_glob = [
+#    '**/migrations/**',
+#    '.git',
+#    '.venv'
+#]
+[tool.isort]
+py_version=310
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+combine_as_imports = true
+combine_star = true
+force_grid_wrap = 0
+skip = ['.gitignore', '.dockerignore']
+skip_glob = [
+    '**/migrations/**',
+    '.git',
+    '.venv',
+    '.idea'
+]
