@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from envparse import env
@@ -24,6 +25,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "social_django",
     "core",
 ]
 
@@ -105,3 +108,14 @@ STATIC_ROOT = BASE_DIR.joinpath("static")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "core.User"
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv("VK_ID")
+SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv("VK_KEY")
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ["email"]
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/logged-in/"
+SOCIAL_AUTH_LOGIN_ERROR_URL = "/login-error/"
+
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.vk.VKOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
+)
