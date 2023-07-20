@@ -1,5 +1,6 @@
 **
 !core
+!goals
 !todolist
 !manage.py
 !poetry.lock
