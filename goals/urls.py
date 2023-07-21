@@ -13,7 +13,7 @@ from goals.views.comments import (
 )
 from goals.views.goals import GoalDetailView, GoalListView, GoalCreateView
 
-app_name = GoalsConfig.name
+app_name = GoalsConfig
 
 
 urlpatterns = [

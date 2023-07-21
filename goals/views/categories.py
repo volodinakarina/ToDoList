@@ -4,8 +4,8 @@ from rest_framework import generics, permissions, filters
 from goals.models import GoalCategory, Goal
 from goals.permissions import GoalCategoryPermission
 from goals.serializers import GoalCategorySerializer, GoalCategoryWitUserSerializer
-
-
+# #
+# #
 class CategoryCreateView(generics.CreateAPIView):
     serializer_class = GoalCategorySerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -13,7 +13,7 @@ class CategoryCreateView(generics.CreateAPIView):
 
 class CategoryListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
-
+# #
     serializer_class = GoalCategoryWitUserSerializer
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ["title", "created"]
