@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 from social_django.models import Association, Nonce
 
-from goals.models import BoardParticipant, Category
+from goals.models import BoardParticipant
 
 from .models import User
 
