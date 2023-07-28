@@ -128,53 +128,58 @@
 #         instance.status = Goal.StatusChoices.archived
 #         instance.save()
 #         return instance
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, generics, permissions
-
-from goals.filters import GoalFilter
-from goals.models import Goal
-from goals.permissions import GoalPermissions
-from goals.serializers.goals_serializers import GoalCreateSerializer, GoalSerializer
 
 
-class GoalCreateView(generics.CreateAPIView):
-    serializer_class = GoalSerializer
-    permission_classes = [permissions.IsAuthenticated]
 
 
-class GoalListView(generics.ListAPIView):
-    serializer_class = GoalCreateSerializer
-    permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [
-        DjangoFilterBackend,
-        filters.OrderingFilter,
-        filters.SearchFilter,
-    ]
-    filterset_class = GoalFilter
-    ordering_fields = ['title', 'description']
-    ordering = ['title']
-    search_fields = ['title', 'description']
 
-    def get_queryset(self):
-        return (
-            Goal.objects.select_related('user')
-            .filter(user=self.request.user, category__is_deleted=False)
-            .exclude(status=Goal.Status.archived)
-        )
-
-
-class GoalDetailView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [GoalPermissions]
-
-    serializer_class = GoalCreateSerializer
-
-    def get_queryset(self):
-        return (
-            Goal.objects.select_related('user')
-            .filter(category__is_deleted=False)
-            .exclude(status=Goal.Status.archived)
-        )
-
-    def perform_destroy(self, instance: Goal) -> None:
-        instance.status = Goal.Status.archived
-        instance.save()
+# from django_filters.rest_framework import DjangoFilterBackend
+# from rest_framework import filters, generics, permissions
+#
+# from goals.filters import GoalFilter
+# from goals.models import Goal
+# from goals.permissions import GoalPermissions
+# from goals.serializers.goals_serializers import GoalCreateSerializer, GoalSerializer
+#
+#
+# class GoalCreateView(generics.CreateAPIView):
+#     serializer_class = GoalSerializer
+#     permission_classes = [permissions.IsAuthenticated]
+#
+#
+# class GoalListView(generics.ListAPIView):
+#     serializer_class = GoalCreateSerializer
+#     permission_classes = [permissions.IsAuthenticated]
+#     filter_backends = [
+#         DjangoFilterBackend,
+#         filters.OrderingFilter,
+#         filters.SearchFilter,
+#     ]
+#     filterset_class = GoalFilter
+#     ordering_fields = ['title', 'description']
+#     ordering = ['title']
+#     search_fields = ['title', 'description']
+#
+#     def get_queryset(self):
+#         return (
+#             Goal.objects.select_related('user')
+#             .filter(user=self.request.user, category__is_deleted=False)
+#             .exclude(status=Goal.Status.archived)
+#         )
+#
+#
+# class GoalDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     permission_classes = [GoalPermissions]
+#
+#     serializer_class = GoalCreateSerializer
+#
+#     def get_queryset(self):
+#         return (
+#             Goal.objects.select_related('user')
+#             .filter(category__is_deleted=False)
+#             .exclude(status=Goal.Status.archived)
+#         )
+#
+#     def perform_destroy(self, instance: Goal) -> None:
+#         instance.status = Goal.Status.archived
+#         instance.save()

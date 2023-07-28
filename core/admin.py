@@ -4,19 +4,19 @@ from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 from social_django.models import Association, Nonce
 
-from goals.models import BoardParticipant
+# from goals.models import BoardParticipant
 
 from .models import User
 
 
-class BoardInline(admin.TabularInline):
-    model = BoardParticipant
-    fields = ('board', 'role', 'created', 'updated')
-    readonly_fields = ('created', 'updated', 'board')
-    ordering = ('role', 'board', 'created')
-    show_change_link = True
-    extra = 0
-    can_delete = False
+# class BoardInline(admin.TabularInline):
+#     model = BoardParticipant
+#     fields = ('board', 'role', 'created', 'updated')
+#     readonly_fields = ('created', 'updated', 'board')
+#     ordering = ('role', 'board', 'created')
+#     show_change_link = True
+#     extra = 0
+#     can_delete = False
 
 
 @admin.register(User)
@@ -49,7 +49,7 @@ class UserAdmin(UserAdmin):
         ),
         (_('Important dates'), {'fields': ('last_login', 'date_joined', 'updated')}),
     )
-    inlines = [BoardInline]
+    # inlines = [BoardInline]
 
 
 admin.site.unregister(Group)

@@ -5,10 +5,16 @@ from rest_framework import serializers
 
 
 class PasswordField(serializers.CharField):
+    # def __init__(self, validate: bool = True, **kwargs: Any) -> None:
+    #     kwargs["style"] = {"input_type": "password"}
+    #     kwargs.setdefault("write_only", True)
+    #     kwargs.setdefault("required", True)
+    #     super().__init__(**kwargs)
+    #     if validate:
+    #         self.validators.append(validate_password)
     def __init__(self, validate: bool = True, **kwargs: Any) -> None:
-        kwargs["style"] = {"input_type": "password"}
-        kwargs.setdefault("write_only", True)
-        kwargs.setdefault("required", True)
+        kwargs.setdefault('write_only', True)
+        kwargs.setdefault('required', True)
         super().__init__(**kwargs)
         if validate:
             self.validators.append(validate_password)
