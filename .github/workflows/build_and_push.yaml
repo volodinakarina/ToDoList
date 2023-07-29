@@ -23,41 +23,45 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/diplom:latest
-
-  deploy:
+#
+#  deploy:
+#    needs: build
 #    runs-on: ubuntu-latest
-#    needs: build_and_push
 #    steps:
-#      - name: clone code
+#      - name: Checkout
 #        uses: actions/checkout@v3
-#      - name: copy files to server
+#      - name: Copy on server
 #        uses: appleboy/scp-action@master
 #        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USERNAME }}
-#          password: ${{ secrets.PASSWORD }}
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USER }}
+#          password: ${{ secrets.SSH_PASSWORD }}
 #          source: "deploy/*"
 #          target: "todolist_15"
 #          strip_components: 1
-#      - name: deploy app
+#      - name: Run compose
+#        uses: actions/checkout@v3
+#      - name: Copy on server
 #        uses: appleboy/ssh-action@master
 #        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USERNAME }}
-#          password: ${{ secrets.PASSWORD }}
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USER }}
+#          password: ${{ secrets.SSH_PASSWORD }}
 #          script: |
-#            cd docker
+#            cd todolist_15
 #            docker-compose pull
 #            docker-compose down
 #            docker-compose up -d
-#      - name: clean up
+#      - name: CleanUp
 #        uses: appleboy/ssh-action@master
 #        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USERNAME }}
-#          password: ${{ secrets.PASSWORD }}
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USER }}
+#          password: ${{ secrets.SSH_PASSWORD }}
 #          script: |
 #            docker system prune -f -a
+
+  deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -69,12 +73,10 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "deploy/*"
-          target: "todolist_15"
+          source: 'deploy/*'
+          target: 'todolist_15'
           strip_components: 1
       - name: Run compose
-        uses: actions/checkout@v3
-      - name: Copy on server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -82,9 +84,9 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd todolist_15
-            docker-compose pull
-            docker-compose down
-            docker-compose up -d
+            docker compose pull
+            docker compose down
+            docker compose up -d
       - name: CleanUp
         uses: appleboy/ssh-action@master
         with:
@@ -93,53 +95,3 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             docker system prune -f -a
-#    runs-on: ubuntu-22.04
-#    needs: build_and_push
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#
-#      - name: Render configs
-#        env:
-#          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-#          DB_NAME: ${{ secrets.DB_NAME }}
-#          DB_USER: ${{ secrets.DB_USER }}
-#          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-#          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-#        run: |
-#          mkdir deploy
-#          envsubst < docker-compose-ci.yaml > deploy/docker-compose.yaml
-#          cat nginx.conf > deploy/nginx.conf
-#
-#      - name: Copy files on server
-#        uses: appleboy/scp-action@master
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          password: ${{ secrets.SSH_PASSWORD }}
-#          source: "deploy/docker-compose.yaml,deploy/nginx.conf"
-#          target: "todolist"
-#          strip_components: 1
-#
-#      - name: Deploy app
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          password: ${{ secrets.SSH_PASSWORD }}
-#          script: |
-#            cd todolist
-#            docker-compose pull
-#            docker-compose down
-#            docker-compose up -d
-#
-#      - name: Cleanup
-#        if: always()
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.HOST}}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          password: ${{ secrets.SSH_PASSWORD }}
-#          script: |
-#            docker system prune -a -f

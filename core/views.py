@@ -64,52 +64,52 @@ from core.serializers import CreatUserSerializer, LoginSerializer, ProfileSerial
 #             return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
 #         else:
 #             return Response(status=status.HTTP_400_BAD_REQUEST)
-#
-#
-# @extend_schema_view(
-#     get=extend_schema(
-#         description='Get all information about user',
-#         summary='User retrieve',
-#         responses={
-#             200: OpenApiResponse(response=UserSerializer),
-#             403: OpenApiResponse(description="You don't have permission"),
-#         },
-#     ),
-#     put=extend_schema(
-#         request=UserSerializer,
-#         description="Update all user's information",
-#         summary='User update',
-#         responses={
-#             200: OpenApiResponse(response=UserSerializer),
-#             400: OpenApiResponse(
-#                 response=UserSerializer.errors,
-#                 description='Bad Request, (something invalid)',
-#             ),
-#             403: OpenApiResponse(description="You don't have permission"),
-#         },
-#     ),
-#     patch=extend_schema(
-#         request=UserSerializer,
-#         description="Update partial user's information",
-#         summary='User update partial',
-#         responses={
-#             200: OpenApiResponse(response=UserSerializer),
-#             400: OpenApiResponse(
-#                 response=UserSerializer.errors,
-#                 description='Bad Request, (something invalid)',
-#             ),
-#             403: OpenApiResponse(description="You don't have permission"),
-#         },
-#     ),
-#     delete=extend_schema(
-#         description='Logout user from system',
-#         summary='User Logout',
-#         responses={
-#             204: OpenApiResponse(description='Successful logout'),
-#             403: OpenApiResponse(description="You don't have permission"),
-#         },
-#     ),
-# )
+# #
+# #
+# # @extend_schema_view(
+# #     get=extend_schema(
+# #         description='Get all information about user',
+# #         summary='User retrieve',
+# #         responses={
+# #             200: OpenApiResponse(response=UserSerializer),
+# #             403: OpenApiResponse(description="You don't have permission"),
+# #         },
+# #     ),
+# #     put=extend_schema(
+# #         request=UserSerializer,
+# #         description="Update all user's information",
+# #         summary='User update',
+# #         responses={
+# #             200: OpenApiResponse(response=UserSerializer),
+# #             400: OpenApiResponse(
+# #                 response=UserSerializer.errors,
+# #                 description='Bad Request, (something invalid)',
+# #             ),
+# #             403: OpenApiResponse(description="You don't have permission"),
+# #         },
+# #     ),
+# #     patch=extend_schema(
+# #         request=UserSerializer,
+# #         description="Update partial user's information",
+# #         summary='User update partial',
+# #         responses={
+# #             200: OpenApiResponse(response=UserSerializer),
+# #             400: OpenApiResponse(
+# #                 response=UserSerializer.errors,
+# #                 description='Bad Request, (something invalid)',
+# #             ),
+# #             403: OpenApiResponse(description="You don't have permission"),
+# #         },
+# #     ),
+# #     delete=extend_schema(
+# #         description='Logout user from system',
+# #         summary='User Logout',
+# #         responses={
+# #             204: OpenApiResponse(description='Successful logout'),
+# #             403: OpenApiResponse(description="You don't have permission"),
+# #         },
+# #     ),
+# # )
 # class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 #     serializer_class = UserSerializer
 #     permission_classes = [IsAuthenticated]
@@ -147,6 +147,9 @@ from core.serializers import CreatUserSerializer, LoginSerializer, ProfileSerial
 #
 #     def get_object(self) -> User:
 #         return self.request.user
+
+
+
 class SingUpView(generics.CreateAPIView):
     serializer_class = CreatUserSerializer
     def post(self, request, *args, **kwargs):

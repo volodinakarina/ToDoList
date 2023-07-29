@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: check-yaml
       - id: trailing-whitespace
-      - id: double-quote-string-fixer
+#      - id: double-quote-string-fixer
       - id: end-of-file-fixer
 #  - repo: https://github.com/PyCQA/isort
 #    rev: 5.12.0
