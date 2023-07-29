@@ -104,9 +104,9 @@ services:
   api:
     build: .
     env_file: .env
-
     environment:
       POSTGRES_HOST: db
+      DEBUG: false
     depends_on:
       db:
         condition: service_healthy
@@ -116,7 +116,6 @@ services:
       - "8000:8000"
     volumes:
       - ./core:/opt/app/core/
-      - ./goals:/opt/app/goals/
       - ./todolist:/opt/app/todolist/
   collect_static:
     build: .
