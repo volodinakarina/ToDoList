@@ -77,8 +77,14 @@ from django.urls import path
 from goals.views.categories import CreateCategoryView, CategoryListView, CategoryDetailView
 from goals.views.goals import GoalListView, GoalCreateView, GoalDetailView
 from goals.views.comments import GoalCommentListView, GoalCommentCreateView, GoalCommentDetailView
+from goals.views.boards import BoardListView, BoardCreateView, BoardDetailView
+
 app_name = GoalsConfig.name
 urlpatterns = [
+    # boards
+    path('board/create', BoardCreateView.as_view(), name='create-board'),
+    path('board/list', BoardListView.as_view(), name='board-list'),
+    path('board/<int:pk>', BoardDetailView.as_view(), name='board-details'),
     # categories
     path('goal_category/create', CreateCategoryView.as_view(), name='create-category'),
     path('goal_category/list', CategoryListView.as_view(), name='category-list'),
