@@ -1,0 +1,21 @@
+{
+    "ok": true,
+    "result": {
+        "message_id": 3,
+        "from": {
+            "id": 6655905163,
+            "is_bot": true,
+            "first_name": "todolist",
+            "username": "evidufbot"
+        },
+        "chat": {
+            "id": 337169868,
+            "first_name": "Karina",
+            "last_name": "Volodina",
+            "username": "volodinakarina",
+            "type": "private"
+        },
+        "date": 1691958711,
+        "text": "hello"
+    }
+}

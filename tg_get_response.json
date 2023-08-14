@@ -1,0 +1,28 @@
+{
+    "ok": true,
+    "result": [
+        {
+            "update_id": 460313695,
+            "message": {
+                "message_id": 2,
+                "from": {
+                    "id": 337169868,
+                    "is_bot": false,
+                    "first_name": "Karina",
+                    "last_name": "Volodina",
+                    "username": "volodinakarina",
+                    "language_code": "en"
+                },
+                "chat": {
+                    "id": 337169868,
+                    "first_name": "Karina",
+                    "last_name": "Volodina",
+                    "username": "volodinakarina",
+                    "type": "private"
+                },
+                "date": 1691958208,
+                "text": "1"
+            }
+        }
+    ]
+}
