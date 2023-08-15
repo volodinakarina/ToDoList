@@ -28,7 +28,4 @@ class Command(BaseCommand):
             print(send_resp)
 
         # logger.debug('Ok')
-        client = TgClient()
-
-        client.send_message(337169868, text='bot works')
 

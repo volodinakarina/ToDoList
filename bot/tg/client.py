@@ -15,13 +15,15 @@ T = TypeVar('T', bound=BaseModel)
 class TgClientError(Exception):
     ...
 
+
 class TgClient:
-    def __int__(self, token: Optional[str] = None):
+    def __init__(self, token: Optional[str] = None):
         self.__token = token if token else settings.BOT_TOKEN
         self.__url = f'https://api.telegram.org/bot{self.__token}/'
 
     def __get_url(self, method: str) -> str:
         return f'{self.__url}{method}'
+
 
     def get_updates(self, offset: int = 0, timeout: int = 60, **kwargs) -> GetUpdateResponse:
         data = self._get('getUpdates', offset=offset, timeout=timeout, **kwargs)
