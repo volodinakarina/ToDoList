@@ -95,7 +95,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      migrations:
+      run_migrations:
         condition: service_completed_successfully
     volumes:
       - ./bot:/app/bot/
