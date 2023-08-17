@@ -143,7 +143,7 @@ services:
     command: python manage.py migrate
 
   bot:
-    image: ${DOCKER_USER}/diplom:latest
+    image: ${DOCKERHUB_USER}/diplom:latest
     env_file: .env
     command: python manage.py runbot
     depends_on:
