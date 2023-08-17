@@ -6,6 +6,7 @@ authors = ["karinavolodina <volodinakarina27@yandex.ru>"]
 
 [tool.poetry.dependencies]
 python = "^3.9.6"
+#python = "^3.10"
 django = "^4.2.2"
 envparse = "^0.2.0"
 psycopg2-binary = "^2.9.6"
@@ -14,6 +15,7 @@ social-auth-app-django = "^5.2.0"
 rest-pandas = "^1.1.0"
 django-filter = "^23.2"
 drf-spectacular = "^0.26.3"
+match = "^0.3.2"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -24,3 +24,10 @@ class TgUser(models.Model):
 
     def __str__(self):
         return f'{self.__class__.__name__} ({self.chat_id})'
+
+# class VerificationCode(models.Model):
+#     verification_code = models.CharField(max_length=20, unique=True, null=True, blank=True)
+#     tg_user = models.ForeignKey(TgUser, on_delete=models.CASCADE)
+#     expired_date = models.DateTimeField()
+#
+#     is_valid = models.BooleanField(default=False)

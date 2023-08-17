@@ -142,6 +142,16 @@ services:
         condition: service_healthy
     command: python manage.py migrate
 
+  bot:
+    image: ${DOCKER_USER}/diplom:latest
+    env_file: .env
+    command: python manage.py runbot
+    depends_on:
+      db:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+
   api:
     image: ${DOCKERHUB_USER}/diplom:latest
     env_file: .env
@@ -159,7 +169,7 @@ services:
       - django_static:/opt/app/static/
 
   frontend:
-    image: sermalenk/skypro-front:lesson-37
+    image: sermalenk/skypro-front:lesson-38
     restart: on-failure
     ports:
       - "80:80"

@@ -89,6 +89,17 @@ services:
       - "5432:5432"
     volumes:
       - diplom_pg_data:/var/lib/postgresql/data/
+#  bot:
+#    build: .
+#    env_file: .env
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#      migrations:
+#        condition: service_completed_successfully
+#    volumes:
+#      - ./bot:/app/bot/
+#    command: python manage.py runbot
 
   run_migrations:
     build: .
@@ -128,7 +139,7 @@ services:
       - django_static:/opt/app/static/
 
   frontend:
-    image: sermalenk/skypro-front:lesson-37
+    image: sermalenk/skypro-front:lesson-38
     ports:
       - "80:80"
     depends_on:
