@@ -16,6 +16,7 @@ rest-pandas = "^1.1.0"
 django-filter = "^23.2"
 drf-spectacular = "^0.26.3"
 match = "^0.3.2"
+pydantic = "^2.2.0"
 
 
 [tool.poetry.group.dev.dependencies]

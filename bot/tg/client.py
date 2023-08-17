@@ -2,7 +2,7 @@ import logging
 from typing import Optional, TypeVar, Type
 from django.conf import settings
 import requests
-from pydantic import ValidationError, BaseModel
+from pydantic import BaseModel, ValidationError
 
 from bot.tg.schemas import GetUpdateResponse, SendMessageResponse
 
