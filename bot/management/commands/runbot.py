@@ -1,7 +1,7 @@
 import logging
 import secrets
 
-from django.core.management import BaseCommand
+from django.core.management import BaseCommand, CommandError
 from django.conf import settings
 import json
 
@@ -22,15 +22,28 @@ class Command(BaseCommand):
         self.users_data = {}
 
 
+    # def handle(self, *args, **options):
+    #     offset = 0
+    #     self.stdout.write(self.style.SUCCESS('Bot started...'))
+    #     while True:
+    #         res = self.tg_client.get_updates(offset=offset, allowed_updates='message')
+    #         for item in res.result:
+    #             offset = item.update_id + 1
+    #             self.handle_message(item.message)
+    def add_arguments(self, parser):
+        parser.add_argument('runbot', nargs='?', default='runbot')
     def handle(self, *args, **options):
-        offset = 0
-        self.stdout.write(self.style.SUCCESS('Bot started...'))
-        while True:
-            res = self.tg_client.get_updates(offset=offset, allowed_updates='message')
-            for item in res.result:
-                offset = item.update_id + 1
-                self.handle_message(item.message)
-    #
+        if options['runbot']:
+            offset = 0
+            try:
+                while True:
+                    res = self.tg_client.get_updates(offset=offset)
+
+                    for item in res.result:
+                        offset = item.update_id + 1
+                        self.handle_message(item.message)
+            except Exception as e:
+                raise CommandError(f'An error occurred: {e}')
     #
     #
     # def handle_message(self, msg: Message):
