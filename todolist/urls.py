@@ -44,6 +44,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('bot/', include('bot.urls', 'bot')),
     path("core/", include(("core.urls", "core"))),
     path('goals/', include('goals.urls', namespace='goals')),
     path('oauth/', include('social_django.urls', namespace='social')),
