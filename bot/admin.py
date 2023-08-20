@@ -7,6 +7,7 @@ from django.utils.html import format_html
 
 from bot.models import TgUser
 
+
 @admin.register(TgUser)
 class TgUserAdmin(admin.ModelAdmin):
     list_display = ('chat_id', 'tg_user')

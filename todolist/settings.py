@@ -3,6 +3,7 @@ from pathlib import Path
 
 from envparse import env
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENV_PATH = BASE_DIR.joinpath(".env")
 if ENV_PATH.is_file():
@@ -14,7 +15,6 @@ SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -131,34 +131,6 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
 }
 
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#     "formatters": {
-#         "console": {
-#             "format": "%(asctime)s - %(levelname)s - %(message)s",
-#             "datefmt": "%y-%m-%d %H:%M:%S",
-#         }
-#     },
-#     "handlers": {
-#         "console": {
-#             "class": "logging.StreamHandler",
-#             "formatter": "console",
-#         },
-#         "null": {
-#             "class": "logging.NullHandler",
-#         }
-#     },
-#     "loggers": {
-#         "": {
-#             "level": "DEBUG" if DEBUG else "INFO",
-#             "handlers": ["console"],
-#         },
-#         "urllib3": {
-#             ""ha"null"
-#         }
-#     },
-# }
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

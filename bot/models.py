@@ -1,5 +1,7 @@
 from django.db import models
+
 from django.utils.crypto import get_random_string
+
 from core.models import User
 
 
@@ -8,7 +10,6 @@ class TgUser(models.Model):
     username = models.CharField(max_length=255, null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     verification_code = models.CharField(max_length=20, unique=True, null=True, blank=True)
-
 
     @property
     def is_verified(self) -> bool:
@@ -24,10 +25,3 @@ class TgUser(models.Model):
 
     def __str__(self):
         return f'{self.__class__.__name__} ({self.chat_id})'
-
-# class VerificationCode(models.Model):
-#     verification_code = models.CharField(max_length=20, unique=True, null=True, blank=True)
-#     tg_user = models.ForeignKey(TgUser, on_delete=models.CASCADE)
-#     expired_date = models.DateTimeField()
-#
-#     is_valid = models.BooleanField(default=False)

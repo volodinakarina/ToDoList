@@ -1,11 +1,10 @@
 from django.db import transaction
 from rest_framework import serializers
-from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
+from rest_framework.exceptions import PermissionDenied, ValidationError
 
 from core.models import User
 from core.serializers import ProfileSerializer
 from goals.models import GoalCategory, GoalComment, Goal, Board, BoardParticipant
-from rest_framework.request import Request
 
 
 class BoardSerializer(serializers.ModelSerializer):
@@ -43,6 +42,7 @@ class BoardWithParticipantsSerializer(BoardSerializer):
                 instance.title = title
 
             instance.save()
+
         return instance
 
 
@@ -58,6 +58,7 @@ class GoalCategorySerializer(serializers.ModelSerializer):
             role__in=[BoardParticipant.Role.owner, BoardParticipant.Role.writer],
         ).exists():
             raise PermissionDenied
+
         return board
 
     class Meta:
@@ -87,6 +88,7 @@ class GoalSerializer(serializers.ModelSerializer):
             role__in=[BoardParticipant.Role.owner, BoardParticipant.Role.writer]
         ).exists():
             raise PermissionDenied
+
         return category
 
 
@@ -111,6 +113,7 @@ class GoalCommentSerializer(serializers.ModelSerializer):
             role__in=[BoardParticipant.Role.owner, BoardParticipant.Role.writer]
         ).exists():
             raise PermissionDenied
+
         return goal
 
 
