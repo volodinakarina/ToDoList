@@ -24,7 +24,7 @@ App wrote on Django with PostgreSQL. Tested with PyTest.
 
 *If you want to run local:*
 1) Clone this repository:    
-`git clone https://github.com/volodinakarina/diplom.v2`
+`git clone https://github.com/volodinakarina/ToDoList`
 
 
 2) Go to the **docker** folder and set up environment variables in the **.docker_env** file:  
