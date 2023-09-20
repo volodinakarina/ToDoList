@@ -1,5 +1,6 @@
 # To-do list APP
 
+
 ## Description:
 **To-do list APP** is a small application for task scheduling. 
 App wrote on Django with PostgreSQL. Tested with PyTest.
